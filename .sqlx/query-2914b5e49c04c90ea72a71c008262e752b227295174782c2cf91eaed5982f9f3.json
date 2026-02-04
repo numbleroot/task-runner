@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "UPDATE webhooks SET state = 'todo' WHERE state = 'in_progress';",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 0
+    },
+    "nullable": []
+  },
+  "hash": "2914b5e49c04c90ea72a71c008262e752b227295174782c2cf91eaed5982f9f3"
+}

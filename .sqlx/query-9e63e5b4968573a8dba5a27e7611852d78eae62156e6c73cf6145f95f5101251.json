@@ -1,0 +1,38 @@
+{
+  "db_name": "SQLite",
+  "query": "SELECT id, state, execution_time, secret FROM hashes ORDER BY execution_time ASC;",
+  "describe": {
+    "columns": [
+      {
+        "name": "id",
+        "ordinal": 0,
+        "type_info": "Text"
+      },
+      {
+        "name": "state",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "execution_time",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "secret",
+        "ordinal": 3,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 0
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "9e63e5b4968573a8dba5a27e7611852d78eae62156e6c73cf6145f95f5101251"
+}

@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "UPDATE hashes SET state = 'failed' WHERE id = $1 AND state = 'todo';",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": []
+  },
+  "hash": "9f652a16676248716a7e3eb6aa986d581347d59ca6900932f740ebb69bf929d4"
+}

@@ -1,0 +1,42 @@
+[package]
+name = "task-runner"
+authors = ["Lennart Oldenburg <hello@lennartoldenburg.de>"]
+version = "0.1.0"
+edition = "2024"
+description = "Task runner, experiment with tokio's DelayQueue"
+license = "Apache-2.0"
+
+[[bin]]
+name = "tasker"
+path = "src/main.rs"
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+overflow-checks = true
+
+[lints.rust]
+unsafe_code = "forbid"
+unused_crate_dependencies = "forbid"
+
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+pedantic = { level = "warn", priority = -1 }
+
+[dependencies]
+axum = { version = "0.8.8", features = ["http2"] }
+base64 = "0.22.1"
+chrono = { version = "0.4.42", features = ["serde"] }
+clap = { version = "4.5.54", features = ["derive", "env"] }
+futures-util = "0.3.31"
+pbkdf2 = { version = "0.12.2", features = ["simple"] }
+rand = { version = "0.8", features = ["std"] }
+reqwest = { version = "0.13.1", features = ["blocking"] }
+serde = { version = "1.0.228", features = ["derive"] }
+sqlx = { version = "0.8.6", features = ["runtime-tokio", "tls-rustls-aws-lc-rs", "sqlite"] }
+tokio = { version = "1.49.0", features = ["full"] }
+tokio-util = { version = "0.7.18", features = ["time"] }
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.22", features = ["env-filter"] }
+uuid = { version = "1.19.0", features = ["v7"] }

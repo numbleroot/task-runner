@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "INSERT INTO hashes ( id, state, execution_time, secret ) VALUES ( $1, $2, $3, $4 );",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 4
+    },
+    "nullable": []
+  },
+  "hash": "8d8fe66beeb36db814681538fe6ab832b98ac4708c7976e5cdab1c880f902201"
+}

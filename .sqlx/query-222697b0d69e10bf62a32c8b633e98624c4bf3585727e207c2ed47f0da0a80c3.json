@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "UPDATE webhooks SET state = 'done' WHERE id = $1;",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": []
+  },
+  "hash": "222697b0d69e10bf62a32c8b633e98624c4bf3585727e207c2ed47f0da0a80c3"
+}

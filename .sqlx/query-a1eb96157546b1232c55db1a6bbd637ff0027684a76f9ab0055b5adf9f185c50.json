@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "DELETE FROM hashes WHERE id = $1 AND state != $2;",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 2
+    },
+    "nullable": []
+  },
+  "hash": "a1eb96157546b1232c55db1a6bbd637ff0027684a76f9ab0055b5adf9f185c50"
+}

@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "UPDATE hashes SET state = 'todo' WHERE state = 'in_progress';",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 0
+    },
+    "nullable": []
+  },
+  "hash": "396adb96f3a8fcab61de94eda13d4074f0dbe1fff82ee3683be1638a783a7094"
+}
