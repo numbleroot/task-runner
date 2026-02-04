@@ -56,14 +56,9 @@ async fn handle_webhook(db_pool: sqlx::sqlite::SqlitePool, task: WorkerWebhook) 
         return;
     };
 
-    // If the time to handle this webhook task has not yet come, postpone.
-    if chrono::Utc::now().fixed_offset() < execution_time {
-        event!(
-            Level::DEBUG,
-            "Execution time for webhook task still in the future: {}",
-            &task.execution_time,
-        );
-        return;
+    // If the time to handle this webhook task has not yet come, wait a bit.
+    while chrono::Utc::now().fixed_offset() < execution_time {
+        tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
     }
 
     // Immediately mark this task's state as `in_progress` as long as it is still in
@@ -71,8 +66,8 @@ async fn handle_webhook(db_pool: sqlx::sqlite::SqlitePool, task: WorkerWebhook) 
     // parallel writers need to take turns), this means that no two tokio tasks
     // entering this handler at the same time will also both proceed beyond this
     // "barrier". Only one of them will while the other won't due to the now
-    // incorrect `state = 'todo'` condition. This prevents the error where the same
-    // task would be handled twice.
+    // incorrect `state = 'todo'` condition. This prevents the situation where the
+    // same task is handled by more than one worker task concurrently.
     let task_id = task.id.clone();
     let res = match sqlx::query!(
         "UPDATE webhooks \
@@ -241,14 +236,9 @@ async fn handle_hash(db_pool: sqlx::sqlite::SqlitePool, task: WorkerHash) {
         return;
     };
 
-    // If the time to handle this hash task has not yet come, postpone.
-    if chrono::Utc::now().fixed_offset() < execution_time {
-        event!(
-            Level::DEBUG,
-            "Execution time for hash task still in the future: {}",
-            &task.execution_time,
-        );
-        return;
+    // If the time to handle this hash task has not yet come, wait a bit.
+    while chrono::Utc::now().fixed_offset() < execution_time {
+        tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
     }
 
     // Immediately mark this task's state as `in_progress` as long as it is still in
@@ -256,8 +246,8 @@ async fn handle_hash(db_pool: sqlx::sqlite::SqlitePool, task: WorkerHash) {
     // parallel writers need to take turns), this means that no two tokio tasks
     // entering this handler at the same time will also both proceed beyond this
     // "barrier". Only one of them will while the other won't due to the now
-    // incorrect `state = 'todo'` condition. This prevents the error where the same
-    // task would be handled twice.
+    // incorrect `state = 'todo'` condition. This prevents the situation where the
+    // same task is handled by more than one worker task concurrently.
     let task_id = task.id.clone();
     let res = match sqlx::query!(
         "UPDATE hashes \
